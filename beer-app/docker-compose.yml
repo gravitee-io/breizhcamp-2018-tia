@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:3.4
+    container_name: mongodb_beer
+    ports: 
+     - 27017:27017
+  beer:
+    build: .
+    container_name: beerService
+    ports:
+      - 8080:8080

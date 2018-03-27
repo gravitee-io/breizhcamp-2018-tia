@@ -1,0 +1,56 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:3.4
+    container_name: mongodb_beer
+    ports: 
+      - 27017:27017
+  elasticsearch:
+    image: elasticsearch:5.6.3
+    container_name: elasticsearch_beer
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=0.0.0.0
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - cluster.name=elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
+  beer:
+    build: ./beer-app
+    container_name: beerService
+    ports:
+      - 8080:8080
+  gateway:
+    hostname: demo-gateway
+    image: graviteeio/gateway:latest
+    ports:
+      - 8082:8082
+    #links:
+    #  - mongodb
+    #  - elasticsearch
+    environment:
+      - GRAVITEEIO_MONGODB_HOST=mongodb
+      - GRAVITEEIO_ELASTIC_HOST=elasticsearch
+  managementui:
+    hostname: demo-managementui
+    image: graviteeio/management-ui:latest
+    ports:
+      - 18000:80
+  managementapi:
+    hostname: demo-managementapi
+    image: graviteeio/management-api:latest
+    ports:
+      - 18083:8083
+    links:
+      - mongodb
+      - elasticsearch
+    environment:
+      - GRAVITEEIO_MONGODB_HOST=mongodb
+      - GRAVITEEIO_ELASTIC_HOST=elasticsearch
+  keycloak:
+    image: jboss/keycloak
+    environment: 
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin

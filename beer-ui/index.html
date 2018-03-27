@@ -39,26 +39,26 @@
         </div>
     </div>
 </div>
-<script src="http://127.0.0.1:8000/auth/js/keycloak.js"></script>
+<script src="http://localhost:17080/auth/js/keycloak.js"></script>
 <script>
     var keycloak = Keycloak({
-            url: 'http://127.0.0.1:8000/auth',
+            url: 'http://localhost:17080/auth',
             realm: 'BeerApp',
             clientId: 'beer'
         });
 
-        /*keycloak.init({ onLoad: 'login-required' }).success(function(authenticated) {
+        keycloak.init({ onLoad: 'login-required' }).success(function(authenticated) {
             alert(authenticated ? 'authenticated' : 'not authenticated');
         }).error(function() {
             alert('failed to initialize');
-        });*/
+        });
 
     
     var apiKey = "565be8c2-bf44-42af-b257-03590612f5a7";
 
     var url = "/api/beers";
     //var url = "http://localhost:8080/api/beers";
-    var url = "http://localhost:8082/beer";
+    var url = "http://localhost:18082/api/beers";
     
 
     $(function () {

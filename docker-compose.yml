@@ -1,22 +1,36 @@
 version: '3'
+
 services:
   mongodb:
     image: mongo:3.4
     container_name: tia_mongo
+
   elasticsearch:
     image: elasticsearch:5.6.3
     container_name: tia_elasticsearch
+    ports:
+      - 9200:9200
     environment:
       - http.host=0.0.0.0
       - transport.host=0.0.0.0
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
       - cluster.name=elasticsearch
-  beer:
+
+  beerapi:
     build: ./beer-app
-    container_name: beerService
+    container_name: tia_beerapi
     ports:
-      - 16080:8080
+      - 16090:8080
+
+  beerui:
+    image: nginx:1.13.10-alpine
+    container_name: tia_beerui
+    volumes:
+      - ./beer-ui:/usr/share/nginx/html
+    ports:
+      - 16080:80
+
   keycloak:
     image: jboss/keycloak
     container_name: tia_keycloak
@@ -25,6 +39,7 @@ services:
     environment:
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
+
   gateway:
     image: graviteeio/gateway:latest
     container_name: tia_gateway
@@ -33,6 +48,7 @@ services:
     environment:
       - GRAVITEEIO_MONGODB_HOST=mongodb
       - GRAVITEEIO_ELASTIC_HOST=elasticsearch
+
   managementui:
     image: graviteeio/management-ui:latest
     container_name: tia_mgmt_ui
@@ -40,6 +56,7 @@ services:
       - 18080:80
     environment:
       - MGMT_API_URL=http:\/\/localhost:18083\/management\/
+
   managementapi:
     image: graviteeio/management-api:latest
     container_name: tia_mgmt_api

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Whisky Collection</title>
+    <title>My Beer Collection</title>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -108,7 +108,7 @@
        
         $.getJSON(url, function (data) {
             $.each(data, function (key, val) {
-                $("<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>" + val.style + "</td>td>" + val.color + "</td>" +
+                $("<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>" + val.style + "</td><td>" + val.color + "</td>" +
                         "<td>" +
                         "<button data-action='edit' class='btn btn-primary btn-sm product-edit' " +
                         "data-toggle='modal' " +

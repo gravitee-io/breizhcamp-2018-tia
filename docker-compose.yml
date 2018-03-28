@@ -45,9 +45,13 @@ services:
     container_name: tia_gateway
     ports:
       - 18082:8082
+    volumes:
+      - ./plugins:/opt/graviteeio-gateway/plugins-ext
     environment:
       - GRAVITEEIO_MONGODB_HOST=mongodb
       - GRAVITEEIO_ELASTIC_HOST=elasticsearch
+      - GRAVITEE_PLUGINS_PATH_0=$${gravitee.home}/plugins
+      - GRAVITEE_PLUGINS_PATH_1=$${gravitee.home}/plugins-ext
 
   managementui:
     image: graviteeio/management-ui:latest
@@ -62,6 +66,10 @@ services:
     container_name: tia_mgmt_api
     ports:
       - 18083:8083
+    volumes:
+      - ./plugins:/opt/graviteeio-management-api/plugins-ext
     environment:
       - GRAVITEEIO_MONGODB_HOST=mongodb
       - GRAVITEEIO_ELASTIC_HOST=elasticsearch
+      - GRAVITEE_PLUGINS_PATH_0=$${gravitee.home}/plugins
+      - GRAVITEE_PLUGINS_PATH_1=$${gravitee.home}/plugins-ext

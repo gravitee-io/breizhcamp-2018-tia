@@ -138,31 +138,6 @@
                 });
             initCallbacks();
         });
-
-/*
-        $.getJSON(url, function (data) {
-            $.each(data, function (key, val) {
-                $("<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>" + val.style + "</td><td>" + val.color + "</td>" +
-                        "<td>" +
-                        "<button data-action='edit' class='btn btn-primary btn-sm product-edit' " +
-                        "data-toggle='modal' " +
-                        "data-target='#productModal' " +
-                        "data-name='" + val.name + "' " +
-                        "data-style='" + val.style + "' " +
-                        "data-color='" + val.color + "' " +
-                        "data-id='" + val.id + "'>" +
-                        "<span class='glyphicon glyphicon-pencil'></span>" +
-                        "</button>" +
-                        "&nbsp;" +
-                        "<button class='btn btn-danger btn-sm product-delete' data-id='" + val.id + "'>" +
-                        "   <span class='glyphicon glyphicon-minus'></span>" +
-                        "</button>" +
-                        "</td>" +
-                        "</tr>").appendTo("#content");
-            });
-            initCallbacks();
-        });
-        */
     }
     function initCallbacks() {
         $(".product-delete").unbind().click(function() {

@@ -43,8 +43,8 @@
 <script>
     var keycloak = Keycloak({
             url: 'http://localhost:17080/auth',
-            realm: 'BeerApp',
-            clientId: 'beer'
+            realm: 'brasserie',
+            clientId: 'beer-service'
         });
 
         keycloak.init({ onLoad: 'login-required' }).success(function(authenticated) {
@@ -53,10 +53,6 @@
             alert('failed to initialize');
         });
 
-    
-    var apiKey = "565be8c2-bf44-42af-b257-03590612f5a7";
-
-    var url = "/api/beers";
     //var url = "http://localhost:8080/api/beers";
     var url = "http://localhost:18082/api/beers";
     
@@ -66,7 +62,7 @@
         initModal();
     });
     function create(name, style, color) {
-        $.post(url + "?api-key=" + apiKey , JSON.stringify({name: name, style: style, color: color}), function () {
+        $.post(url, JSON.stringify({name: name, style: style, color: color}), function () {
             load();
         }, "json");
         /*$.ajax({
@@ -85,7 +81,7 @@
             method: "DELETE",
             url: url + "/" + id,
             headers: {
-                "X-Gravitee-Api-Key": apiKey
+                "Authorization": "Bearer " + keycloak.token
             },
             type: "json"
         }).done(function () {
@@ -96,9 +92,9 @@
         console.log(JSON.stringify({name: name, style: style, color: color}));
         $.ajax({
             method: "PUT",
-            url: url + "/" + id+ "?api-key=" + apiKey ,
+            url: url + "/" + id,
             headers: {
-                "X-Gravitee-Api-Key": apiKey
+                "Authorization": "Bearer " + keycloak.token
             },
             crossDomain: true,
             data: JSON.stringify({name: name, style: style, color: color})
@@ -110,7 +106,7 @@
         
         $("#content").children().remove();
        
-        $.getJSON(url  + "?api-key=" + apiKey, function (data) {
+        $.getJSON(url, function (data) {
             $.each(data, function (key, val) {
                 $("<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>" + val.style + "</td>td>" + val.color + "</td>" +
                         "<td>" +

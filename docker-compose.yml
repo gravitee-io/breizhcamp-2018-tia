@@ -20,8 +20,6 @@ services:
   beerapi:
     build: ./beer-app
     container_name: tia_beerapi
-    ports:
-      - 16090:8080
 
   beerui:
     image: nginx:1.13.10-alpine

@@ -65,19 +65,17 @@
         initModal();
     });
     function create(name, style, color) {
-        $.post(url, JSON.stringify({name: name, style: style, color: color}), function () {
-            load();
-        }, "json");
-        /*$.ajax({
+        $.ajax({
             method: "POST",
             url: url,
             headers: {
-                "X-Gravitee-Api-Key": apiKey
+                "Authorization": "Bearer " + keycloak.token
             },
+            crossDomain: true,
             data: JSON.stringify({name: name, style: style, color: color})
         }).done(function () {
             load();
-        });*/
+        });
     }
     function remove(id) {
         $.ajax({
@@ -92,7 +90,6 @@
         });
     }
     function update(id, name, style, color) {
-        console.log(JSON.stringify({name: name, style: style, color: color}));
         $.ajax({
             method: "PUT",
             url: url + "/" + id,

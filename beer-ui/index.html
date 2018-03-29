@@ -16,10 +16,13 @@
     </div>
     <div class="page-header">
         <h1>My Beers</h1>
+        <div align="right"><a href="javascript:logout();">Logout</a></div>
+        <hr/>
         <button class="pull-right btn btn-primary product-add" data-action="add" data-toggle="modal"
                 data-target="#productModal">
             <span class="glyphicon glyphicon-plus"></span> Add a new bottle
         </button>
+
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-striped">
@@ -41,6 +44,8 @@
 </div>
 <script src="http://localhost:17080/auth/js/keycloak.js"></script>
 <script>
+    var user = undefined;
+
     var keycloak = Keycloak({
             url: 'http://localhost:17080/auth',
             realm: 'brasserie',
@@ -48,8 +53,13 @@
         });
 
         keycloak.init({ onLoad: 'login-required' }).success(function(authenticated) {
-            alert(authenticated ? 'authenticated' : 'not authenticated');
             if (authenticated) {
+                keycloak.loadUserProfile().success(function(profile) {
+                    user = profile;
+                    console.log(user);
+                }).error(function() {
+                    alert('Failed to load user profile');
+                });
                 load();
             }
         }).error(function() {
@@ -61,9 +71,14 @@
     
 
     $(function () {
-        
         initModal();
     });
+
+    function logout() {
+        user = undefined;
+        keycloak.logout();
+    }
+
     function create(name, style, color) {
         $.ajax({
             method: "POST",

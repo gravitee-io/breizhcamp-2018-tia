@@ -11,14 +11,19 @@ Pull images and run
 
 ## Step 3: Declare your API
 Go to the Gravitee.io Portal: http://localhost:18080/
+![Alt text](assets/screenshot1.png?raw=true "Portal")
 
 Login as admin:admin
+![Alt text](assets/screenshot2.png?raw=true "Login")
 
 Click on the avatar (top right) > Administration > click on (+) buttom (bottom right)
+![Alt text](assets/screenshot3.png?raw=true "Administration")
 
 Create an API from scratch
+![Alt text](assets/screenshot4.png?raw=true "Create an API from scratch")
 
 Fill the form
+![Alt text](assets/screenshot5.png?raw=true "Create API")
 
 Set the backend to `http://beerapi:8080/api/beers`
 

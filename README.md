@@ -26,5 +26,10 @@ Fill the form
 ![Alt text](assets/screenshot5.png?raw=true "Create API")
 
 Set the backend to `http://beerapi:8080/api/beers`
+![Alt text](assets/screenshot6.png?raw=true "Define Backend")
 
 Create a Keyless (pass-trough) consumer plan
+![Alt text](assets/screenshot7.png?raw=true "Define pass-trough plan")
+
+Create and deploy the API
+![Alt text](assets/screenshot8.png?raw=true "Create and deploy API")

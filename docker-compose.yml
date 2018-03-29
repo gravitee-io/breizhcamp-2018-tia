@@ -21,7 +21,7 @@ services:
     build: ./beer-app
     container_name: tia_beerapi
     ports:
-      - 16070:80
+      - 16070:8080
     depends_on:
       - mongodb
 
